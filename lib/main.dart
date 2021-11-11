@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fundamental/post_method.dart';
 import 'package:flutter_fundamental/user_model.dart';
+import 'package:flutter_fundamental/users_model.dart';
 
 void main() {
   runApp(new MyApp());
@@ -14,6 +15,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   PostResult postResult;
   User user;
+  String output = "No Data";
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +64,19 @@ class _MyAppState extends State<MyApp> {
                   });
                 },
                 child: Text("Get"),
+              ),
+              Text(output),
+              TextButton(
+                onPressed: () {
+                  Users.getUser("2").then((result) {
+                    output = "";
+                    for (int i = 0; i < result.length; i++) {
+                      output = output + "{ " + result[i].name + " }";
+                      setState(() {});
+                    }
+                  });
+                },
+                child: Text("Gets"),
               )
             ]),
       ),
